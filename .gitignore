@@ -1,0 +1,9 @@
+bzImages
+disk_images
+my_mnt
+*.iso
+*.img
+qemu_x86.sh
+qemu_x86_docker.sh
+.config
+bzImage
