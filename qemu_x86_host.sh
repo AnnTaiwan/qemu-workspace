@@ -14,19 +14,20 @@
 DISK_IMAGE="/home/annpc/Desktop/gem5_mine/qemu_workspace/disk_images/x86-ubuntu-14.04.6_v1.img"
 KERNEL="/home/annpc/Desktop/gem5_mine/qemu_workspace/bzImages/bzImage"
 NOGRAPHIC=false
-
+GDB_DEBUG=false
 # Usage function
 usage() {
-    echo "Usage: $0 [-h] [-i disk_image] [-k kernel] [-g yes|no]"
+    echo "Usage: $0 [-h] [-i disk_image] [-k kernel] [-g yes|no] [-d]"
     echo "  -h              Print this help message"
     echo "  -i disk_image   Path to disk image, Default is $DISK_IMAGE"
     echo "  -k kernel       Path to kernel, Default is $KERNEL"
     echo "  -g yes|no       Use -nographic if types no, default is without -nographic"
+    echo "  -d              Use GDB debug"
     exit 1
 }
 
 # Parse arguments
-while getopts "hi:k:g:" opt; do
+while getopts "hi:k:g:d" opt; do
     case $opt in
         h) usage ;;
         i) DISK_IMAGE="$OPTARG" ;;
@@ -36,6 +37,7 @@ while getopts "hi:k:g:" opt; do
                 NOGRAPHIC=true
             fi
             ;;
+        d) GDB_DEBUG=true ;;
         \?) # Invalid option
             echo "Invalid option: -$OPTARG"
             usage
@@ -62,6 +64,9 @@ QEMU_CMD="qemu-system-x86_64 \
 # Add -nographic if requested
 if $NOGRAPHIC; then
     QEMU_CMD="$QEMU_CMD -nographic"
+fi
+if $GDB_DEBUG; then
+    QEMU_CMD="$QEMU_CMD -S -gdb tcp::7001"
 fi
 
 # Execute
