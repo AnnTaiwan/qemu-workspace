@@ -1,11 +1,8 @@
-bzImages
-disk_images
-vmlinuxes
-my_mnt
 *.iso
 *.img
 qemu_x86.sh
 qemu_x86_docker.sh
 .config
-bzImage*
+bzImages/bzImage*
+bzImage-*
 vmlinux*

@@ -11,8 +11,8 @@
 #     -net user -net nic \
 #     # -net user,hostfwd=tcp::10022-:22 -net nic \
 # Default values
-DISK_IMAGE="/home/annpc/Desktop/gem5_mine/qemu_workspace/disk_images/x86-ubuntu-14.04.6_v1.img"
-KERNEL="/home/annpc/Desktop/gem5_mine/qemu_workspace/bzImages/bzImage"
+DISK_IMAGE="disk_images/x86-ubuntu-14.04.6_v2.img"
+KERNEL="bzImages/bzImage"
 NOGRAPHIC=false
 GDB_DEBUG=false
 # Usage function
@@ -50,10 +50,10 @@ QEMU_CMD="qemu-system-x86_64 \
     -enable-kvm \
     -cpu host \
     -smp 8 \
-    -m 16G \
+    -m 32G \
     -hda $DISK_IMAGE \
     -kernel $KERNEL \
-    -append 'root=/dev/hda1 console=ttyS0 memmap=8G!9G nokaslr norandmaps' \
+    -append 'root=/dev/hda1 console=ttyS0 memmap=16G!17G nokaslr norandmaps' \
     -serial mon:stdio \
     -net user -net nic"
     # -netdev user,id=net0 -device rtl8139,netdev=net0"
@@ -66,7 +66,7 @@ if $NOGRAPHIC; then
     QEMU_CMD="$QEMU_CMD -nographic"
 fi
 if $GDB_DEBUG; then
-    QEMU_CMD="$QEMU_CMD -S -gdb tcp::7001"
+    QEMU_CMD="$QEMU_CMD -S -gdb tcp::6666"
 fi
 
 # Execute
