@@ -11,8 +11,8 @@
 #     -net user -net nic \
 #     # -net user,hostfwd=tcp::10022-:22 -net nic \
 # Default values
-DISK_IMAGE="/home/annpc/Desktop/gem5_mine/qemu_workspace/disk_images/x86-ubuntu-14.04.6_v1.img"
-KERNEL="/home/annpc/Desktop/gem5_mine/qemu_workspace/bzImages/bzImage"
+DISK_IMAGE="./disk_images/x86-ubuntu-14.04.6_v2.img"
+KERNEL="./bzImages/bzImage-1-qemu"
 NOGRAPHIC=false
 GDB_DEBUG=false
 # Usage function
